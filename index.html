@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Jogo da sorte</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Jogo da Sorte</h1>
+        <p>Advinhe o número de 1 a 10</p>
+        <input type="number" id="chute" min="1" max="10">
+        <button onclick="verificarResposta()">Tentar</button>
+        <button onclick="reiniciarJogo()">Nova Rodada</button>
+        <div class="mensagem" id="resultado"></div>
+    </div>
+    <div class="fireworks" id="fireworks">
+    </div>
+    <div id="placar">
+        <p id="placar-vitorias">Vitórias: 0</p>
+        <p id="placar-derrotas">Derrotas: 0</p>
+    </div>    
+</body>
+</html>
