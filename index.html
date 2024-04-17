@@ -5,15 +5,14 @@
     <title>Jogo da sorte</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="script.js"></script>
-
 </head>
 <body>
     <div class="container">
         <h1>Jogo da Sorte</h1>
         <p>Advinhe o número de 1 a 10</p>
-        <input type="number" id="chute" min="1" max="10">
-        <button onclick="verificarResposta()">Tentar</button>
-        <button onclick="reiniciarJogo()">Nova Rodada</button>
+        <input type="number" id="chute" min="1" max="10" required> 
+        <button onclick="verificarResposta()" aria-label="Tentar">Tentar</button>
+        <button onclick="reiniciarJogo()" aria-label="Nova Rodada">Nova Rodada</button>
         <div class="mensagem" id="resultado"></div>
     </div>
     <div class="fireworks" id="fireworks">
