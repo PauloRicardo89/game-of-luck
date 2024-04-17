@@ -34,19 +34,25 @@ function verificarResposta() {
         }
     }
 }
-
 function reiniciarJogo() {
-    numeroPensado = gerarNumeroAleatorio(); // Gera um novo número
-    document.getElementById('chute').value = ''; // Limpa o campo de entrada
-    document.getElementById('resultado').textContent = ''; // Limpa a mensagem de resultado
-    tentativas = 3; // Restaura o número de tentativas
+    // Exibe uma caixa de diálogo de confirmação
+    let confirmacao = confirm("Tem certeza de que deseja reiniciar o jogo? Todas as pontuações serão perdidas.");
+    
+    // Se o usuário clicar em "OK", o jogo será reiniciado
+    if (confirmacao == true) {
+        numeroPensado = gerarNumeroAleatorio(); // Gera um novo número
+        document.getElementById('chute').value = ''; // Limpa o campo de entrada
+        document.getElementById('resultado').textContent = ''; // Limpa a mensagem de resultado
+        tentativas = 3; // Restaura o número de tentativas
 
-    // Zera o placar
-    vitorias = 0;
-    derrotas = 0;
-    document.getElementById('placar-vitorias').textContent = `Vitórias: ${vitorias}`;
-    document.getElementById('placar-derrotas').textContent = `Derrotas: ${derrotas}`;
+        // Zera o placar
+        vitorias = 0;
+        derrotas = 0;
+        document.getElementById('placar-vitorias').textContent = `Vitórias: ${vitorias}`;
+        document.getElementById('placar-derrotas').textContent = `Derrotas: ${derrotas}`;
+    }
 }
+
 function mostrarFogos() {
     let fireworks = document.getElementById('fireworks');
     fireworks.innerHTML = '';
