@@ -1,110 +1,771 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f7f7f7;
-    margin: 0;
-    padding: 2rem; 
+  font-family: "Arial", sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  margin: 0;
+  padding: 1rem; /* Reduzido para telas menores */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box; /* Garante que padding não aumente o tamanho total */
+}
+
+.container,
+#placar {
+  background-color: #fff;
+  padding: 1.5rem; /* Reduzido para telas menores */
+  border-radius: 0.75rem; /* Reduzido para telas menores */
+  box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.15); /* Ajuste sutil na sombra */
+  text-align: center;
+  margin-bottom: 1.5rem; /* Ajustado */
+  transition: all 0.3s ease;
+  max-width: 500px;
+  width: 100%;
+  box-sizing: border-box; /* Garante que padding não aumente o tamanho total */
+}
+
+.container:hover {
+  /* transform: translateY(-5px); */ /* Removido para evitar movimento no hover */
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.game-image {
+  max-width: 150px; /* Reduzido para telas menores */
+  border-radius: 10px;
+  margin: 1rem auto;
+  display: block;
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 37.5rem) {
+  /* Aproximadamente 600px */
+  body {
+    padding: 2rem; /* Restaura padding maior para telas grandes */
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-}
+    justify-content: center;
+    align-items: flex-start;
+  }
 
-.container, #placar {
-    background-color: #fff;
-    padding: 2.5rem; 
-    border-radius: 1rem; 
-    box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.1); 
-    text-align: center;
-    margin-bottom: 2rem; 
-}
+  .container {
+    max-width: 500px;
+    margin: 0 auto; /* Centraliza o jogo */
+    padding: 2.5rem; /* Restaura padding maior */
+    border-radius: 1rem; /* Restaura border-radius maior */
+  }
 
-@media (min-width: 37.5rem) { 
-    body {
-        flex-direction: row;
-        justify-content: space-around;
-    }
+  #placar {
+    margin: 1rem;
+    padding: 2.5rem; /* Restaura padding maior */
+    border-radius: 1rem; /* Restaura border-radius maior */
+  }
 
-    .container, #placar {
-        margin-bottom: 0;
-    }
+  .game-image {
+    max-width: 200px; /* Restaura tamanho maior da imagem */
+  }
 }
 
 h1 {
-    color: #333;
+  color: #222;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+  margin-top: 0;
+  font-size: 1.8rem; /* Ajustado para melhor leitura em mobile */
 }
+
 p {
-    color: #666;
+  color: #333;
+  font-size: 1rem; /* Ajustado para melhor leitura em mobile */
 }
-input, button {
-    padding: 1rem; 
-    margin-top: 1rem; 
-    border: 0.1rem solid #ddd; 
-    border-radius: 0.5rem;
-    font-size: 1.6rem; 
+
+input,
+button,
+select {
+  padding: 0.8rem; /* Reduzido para telas menores */
+  margin: 0.4rem; /* Reduzido para telas menores */
+  border: 0.1rem solid #ddd;
+  border-radius: 0.5rem;
+  font-size: 1rem; /* Reduzido para telas menores */
+  transition: all 0.3s;
+  width: calc(
+    100% - 0.8rem
+  ); /* Faz os inputs e botões ocuparem a largura, descontando a margem */
+  box-sizing: border-box;
 }
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #5cb85c;
+  box-shadow: 0 0 0 2px rgba(92, 184, 92, 0.25);
+}
+
 button {
-    cursor: pointer;
-    background-color: #5cb85c;
-    color: white;
-    border: none;
+  cursor: pointer;
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  font-weight: bold;
+  min-width: 90px; /* Ajustado */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
 button:hover {
-    background-color: #4cae4c;
+  background-color: #4cae4c;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
 }
+
+button:focus {
+  outline: 2px solid #4cae4c;
+  outline-offset: 2px;
+}
+
+.game-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; /* Garante que os controles ocupem a largura */
+}
+
+@media (min-width: 400px) {
+  .game-controls {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  input,
+  button,
+  select {
+    width: auto; /* Restaura largura automática para botões/inputs em linha */
+  }
+}
+
 .mensagem {
-    margin-top: 2rem; 
-    font-weight: bold;
-}     
+  margin-top: 1.5rem;
+  padding: 1rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  transition: all 0.3s;
+  min-height: 2rem;
+}
+
+.dica {
+  margin-top: 1rem;
+  font-style: italic;
+  color: #d07000;
+  font-weight: 500;
+  min-height: 1.5rem;
+}
+
+.success {
+  background-color: rgba(92, 184, 92, 0.2);
+  color: #4cae4c;
+}
+
+.error {
+  background-color: rgba(220, 53, 69, 0.2);
+  color: #dc3545;
+}
+
+/* Animação de comemoração aprimorada */
 .fireworks {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    display: none;
-    z-index: 2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  display: none;
+  z-index: 100;
+  overflow: hidden;
 }
-.firework, .mini-explosion {
-    position: absolute;
-    bottom: -10rem; 
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0.5rem; 
-    height: 0.5rem; 
-    border-radius: 50%;
-    background-color: #ff0;
-    animation: shootUp 800ms ease-out forwards, explode 1200ms ease-in-out forwards 800ms, fallDown 800ms ease-in forwards 2000ms;
+
+/* Fogos de artifício */
+.firework {
+  position: absolute;
+  bottom: -10rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  transform-origin: center;
+  animation: shootUp 0.8s ease-out forwards;
 }
+
+/* Confetes e estrelas */
+.confetti,
+.star {
+  position: absolute;
+  top: -20px;
+  width: 10px;
+  height: 10px;
+  opacity: 0;
+}
+
+.confetti {
+  backface-visibility: hidden;
+  animation: confettiFall 3s ease-in-out forwards;
+}
+
+.star {
+  background-color: #fff;
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+  animation: starFall 2s ease-in-out forwards;
+}
+
+/* Pulso de luz */
+.flash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0);
+  animation: flash 0.5s ease-out forwards;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Partículas da explosão */
+.particle {
+  position: absolute;
+  background-color: #ff0;
+  border-radius: 50%;
+  width: 5px;
+  height: 5px;
+  animation: particleFade 1.5s ease-out forwards;
+}
+
+/* Texto "PARABÉNS!" animado */
+.congrats-text {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  font-size: 3rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 0 10px #ff0, 0 0 20px gold, 0 0 30px orange;
+  opacity: 0;
+  z-index: 3;
+  animation: congratsAppear 1.5s ease-out forwards;
+}
+
+/* Keyframes para as animações */
 @keyframes shootUp {
-    0% { bottom: -10rem; opacity: 1; } 
-    100% { bottom: 80%; opacity: 0; }
+  0% {
+    bottom: -10rem;
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    bottom: 70%;
+    opacity: 0;
+    transform: scale(0.1);
+  }
 }
-@keyframes explode {
-    0% { transform: translateX(-50%) scale(0); opacity: 1; }
-    100% { transform: translateX(-50%) scale(22.5); opacity: 0; } 
+
+@keyframes particleFade {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
 }
-@keyframes fallDown {
-    0% { bottom: 80%; opacity: 1; }
-    100% { bottom: 50%; opacity: 0; }
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0.3;
+  }
 }
-.mini-explosion {
-    animation: miniExplode 600ms ease-in-out forwards;
-    opacity: 0; 
+
+@keyframes starFall {
+  0% {
+    transform: translateY(-10px) rotate(0deg) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0px) rotate(0deg) scale(1.2);
+  }
+  100% {
+    transform: translateY(60vh) rotate(360deg) scale(0.5);
+    opacity: 0;
+  }
 }
-@keyframes miniExplode {
-    0% { transform: scale(0); opacity: 0.5; }
-    100% { transform: scale(5); opacity: 0; }
+
+@keyframes flash {
+  0% {
+    background: rgba(255, 255, 255, 0.8);
+  }
+  100% {
+    background: rgba(255, 255, 255, 0);
+  }
 }
+
+@keyframes congratsAppear {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  75% {
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Adicionar efeito de piscar para algumas estrelas */
+@keyframes blink {
+  0% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
 #placar {
+  position: static;
+  transform: none;
+  background-color: #fff;
+  margin-bottom: 1.5rem; /* Ajustado */
+  width: 100%; /* Garante que ocupe a largura em telas menores */
+  min-width: 0; /* Remove min-width para telas menores */
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  #placar {
     position: absolute;
-    top: 2rem; 
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #fff;
-    padding: 1rem; 
-    border-radius: 0.5rem; 
-    box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.1); 
-    text-align: center;
-    width: 20rem;
+    top: 2rem;
+    right: 2rem;
+    width: 25%;
+    min-width: 250px;
+    margin-bottom: 0;
+  }
+
+  /* Movendo o seletor de dificuldade para dentro do placar */
+  #placar .difficulty {
+    margin-top: 0.8rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 0.8rem;
+  }
+
+  #placar select {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 767px) {
+  body {
+    position: relative;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .container {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .game-image {
+    max-width: 150px;
+  }
+
+  #placar {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 200px;
+    min-width: 200px;
+  }
+
+  /* Seletor de dificuldade ajustado */
+  #placar .difficulty {
+    margin-top: 0.8rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 0.5rem;
+  }
+
+  #placar select {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+  }
+}
+
+.game-image {
+  max-width: 120px; /* Aumentado um pouco */
+}
+
+@media (max-width: 599px) {
+  /* Ajustes para telas pequenas - manter o layout vertical mas melhorar o espaçamento */
+  .game-image {
+    max-width: 120px; /* Aumentado um pouco */
+  }
+
+  /* Ajustar o seletor de dificuldade dentro do placar */
+  #placar .difficulty {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  #placar select {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.3rem;
+  }
+
+  /* Reduzir espaços para evitar rolagem */
+  #placar {
+    padding: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+}
+
+/* Ajuste fino para telas muito pequenas */
+/* Ajustes para dispositivos muito pequenos */
+@media (max-width: 320px) {
+  .game-image {
+    max-width: 90px;
+  }
+
+  #placar select {
+    font-size: 0.8rem;
+    padding: 0.4rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  input,
+  button {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  .container {
+    padding: 0.8rem;
+  }
+
+  .mensagem {
+    padding: 0.7rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Ajustes específicos para visualização em tela cheia */
+@media (max-height: 720px) {
+  /* Ajustes simples para economizar espaço vertical */
+  .container {
+    padding: 1rem;
+  }
+
+  .game-image {
+    max-width: 100px;
+    margin: 0.5rem auto;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .difficulty {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+  }
+
+  .mensagem {
+    margin-top: 0.7rem;
+    padding: 0.5rem;
+  }
+
+  .dica {
+    margin-top: 0.5rem;
+  }
+
+  /* Placar mais compacto */
+  #placar {
+    padding: 0.8rem;
+  }
+}
+
+/* Ajustes mais intensos para telas realmente pequenas */
+@media (max-height: 600px) {
+  /* Ajustes mais agressivos mas sem mudar drasticamente o visual */
+  body {
+    padding: 0.5rem;
+  }
+
+  .container,
+  #placar {
+    margin-bottom: 0.5rem;
+  }
+
+  .game-image {
+    max-width: 80px;
+    margin: 0.3rem auto;
+  }
+
+  /* Reduzir espaço vertical do título */
+  h1 {
+    margin-top: 0;
+    margin-bottom: 0.3rem;
+  }
+
+  /* Minimizar espaços desnecessários */
+  p {
+    margin: 0.3rem 0;
+  }
+}
+
+/* Otimização para eliminar rolagem em telas móveis */
+@media (max-height: 670px) {
+  /* Layout fixo para caber em uma tela pequena */
+  body {
+    padding-top: 0;
+    height: 100vh;
+  }
+
+  .container,
+  #placar {
+    padding: 0.75rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .game-image {
+    max-width: 70px;
+    margin: 0.25rem auto;
+  }
+
+  h1 {
+    font-size: 1.3rem;
+    margin: 0 0 0.25rem 0;
+  }
+
+  .difficulty {
+    margin-top: 0.25rem;
+    padding-top: 0.25rem;
+  }
+
+  .mensagem {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    min-height: 1.4rem;
+  }
+
+  .dica {
+    margin-top: 0.25rem;
+    min-height: 1.2rem;
+  }
+
+  /* Placar mais compacto com layout em linha */
+  #placar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  #placar p,
+  #timer {
+    margin: 0.2rem;
+    width: 45%;
+    font-size: 0.85rem;
+  }
+
+  /* Ajustes para botões em telas baixas */
+  .game-controls {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.3rem;
+  }
+
+  button {
+    padding: 0.5rem;
+    margin: 0.2rem;
+  }
+}
+
+/* Melhorar responsividade e posicionamento dos elementos principais */
+@media (min-width: 768px) {
+  body {
+    position: relative;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .container {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .game-image {
+    max-width: 180px; /* Aumentado para telas maiores */
+  }
+
+  #placar {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 250px;
+    min-width: 250px;
+    margin-bottom: 0;
+  }
+
+  /* Movendo o seletor de dificuldade para dentro do placar */
+  #placar .difficulty {
+    margin-top: 0.8rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 0.8rem;
+  }
+
+  #placar select {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+}
+
+/* Melhorias para orientação landscape em dispositivos móveis */
+@media (max-height: 500px) and (orientation: landscape) {
+  body {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .container {
+    width: 60%;
+    max-width: 500px;
+    margin-right: 1rem;
+    padding: 0.8rem;
+  }
+
+  #placar {
+    width: 30%;
+    max-width: 250px;
+    position: relative;
+    margin-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .game-image {
+    max-width: 80px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 1rem;
+  }
+
+  h1 {
+    font-size: 1.3rem;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+  }
+
+  .game-controls {
+    margin-top: 0.5rem;
+  }
+
+  .mensagem,
+  .dica {
+    margin-top: 0.3rem;
+    padding: 0.3rem;
+    min-height: 1rem;
+  }
+
+  button {
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+/* Melhorando acessibilidade e contraste */
+h1 {
+  color: #222;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+  margin-top: 0;
+  font-size: 1.8rem;
+}
+
+p {
+  color: #333;
+  font-size: 1rem;
+}
+
+.dica {
+  color: #d07000;
+  font-weight: 500;
+}
+
+/* Melhor contraste para os botões */
+button {
+  cursor: pointer;
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  font-weight: bold;
+  min-width: 90px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  background-color: #4cae4c;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+}
+
+button:focus {
+  outline: 2px solid #4cae4c;
+  outline-offset: 2px;
+}
+
+/* Class auxiliar para acessibilidade - esconde visualmente mas mantém para leitores de tela */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }

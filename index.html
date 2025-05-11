@@ -1,25 +1,58 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jogo da sorte</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="script.js"></script>
-</head>
-<body>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
     <div class="container">
-        <h1>Jogo da Sorte</h1>
-        <p>Advinhe o número de 1 a 10</p>
-        <input type="number" id="chute" min="1" max="10" required> 
-        <button onclick="verificarResposta()" aria-label="Tentar">Tentar</button>
-        <button onclick="reiniciarJogo()" aria-label="Nova Rodada">Nova Rodada</button>
-        <div class="mensagem" id="resultado"></div>
+      <h1>Jogo da Sorte</h1>
+      <img
+        id="game-image"
+        src="sorte 2.jpeg"
+        alt="Imagem do jogo da sorte"
+        class="game-image"
+      />
+      <p>
+        Adivinhe o número de <span id="min-num">1</span> a
+        <span id="max-num">10</span>
+      </p>
+
+      <div class="game-controls">
+        <label for="chute" class="visually-hidden">Seu palpite:</label>
+        <!-- Label oculta para acessibilidade -->
+        <input
+          type="number"
+          id="chute"
+          min="1"
+          max="10"
+          placeholder="Digite um número"
+          required
+        />
+        <button id="verificar-btn" aria-label="Tentar">Tentar</button>
+        <button id="reiniciar-btn" aria-label="Nova Rodada">Nova Rodada</button>
+      </div>
+
+      <div class="mensagem" id="resultado"></div>
+      <div id="dica" class="dica"></div>
     </div>
-    <div class="fireworks" id="fireworks">
-    </div>
+    <div class="fireworks" id="fireworks"></div>
     <div id="placar">
-        <p id="placar-vitorias">Vitórias: 0</p>
-        <p id="placar-derrotas">Derrotas: 0</p>
-    </div>    
-</body>
+      <p id="placar-vitorias">Vitórias: 0</p>
+      <p id="placar-derrotas">Derrotas: 0</p>
+      <p id="melhor-tempo">Melhor tempo: --</p>
+      <div id="timer">Tempo: 0s</div>
+      <div class="difficulty">
+        <label for="dificuldade">Dificuldade:</label>
+        <select id="dificuldade">
+          <option value="facil">Fácil (1-10)</option>
+          <option value="medio">Médio (1-50)</option>
+          <option value="dificil">Difícil (1-100)</option>
+        </select>
+      </div>
+    </div>
+  </body>
 </html>
